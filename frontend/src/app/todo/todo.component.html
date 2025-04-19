@@ -1,0 +1,53 @@
+<div class="max-w-xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow-2xl">
+  <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">
+    📝 Yapılacaklar Listesi
+  </h1>
+
+  <!-- Yeni görev ekleme -->
+  <div class="flex items-center gap-2 mb-6">
+    <input
+      [(ngModel)]="newTodo"
+      type="text"
+      class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      placeholder="Yeni görev yaz..."
+    />
+    <button
+      (click)="addTodo()"
+      class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all"
+    >
+      Ekle
+    </button>
+  </div>
+
+  <!-- Görev listesi -->
+  <ul class="space-y-2">
+    <li
+      *ngFor="let todo of todos"
+      class="flex items-center justify-between px-4 py-2 bg-gray-100 rounded-lg"
+    >
+      <div class="flex items-center gap-3">
+        <input
+          type="checkbox"
+          [checked]="todo.done"
+          (change)="toggleTodo(todo)"
+          class="w-4 h-4 accent-blue-600"
+        />
+        <span
+          [ngClass]="{
+            'line-through text-gray-400': todo.done,
+            'text-gray-800': !todo.done
+          }"
+          class="text-base"
+        >
+          {{ todo.title }}
+        </span>
+      </div>
+      <button
+        (click)="deleteTodo(todo)"
+        class="text-red-500 hover:underline text-sm"
+      >
+        Sil
+      </button>
+    </li>
+  </ul>
+</div>
